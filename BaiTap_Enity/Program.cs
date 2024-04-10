@@ -17,6 +17,12 @@ namespace BaiTap_Enity
                 var list = db.Students.Join(db.Faculties,
                                          s => s.FacultyId, f => f.FacultyId,
                                          (s, f) => new { s, f });
+                Console.WriteLine("Danh Sach Sinh Vien");
+                foreach (var item in list)
+                {
+                    Console.WriteLine($"Msv: {item.s.StudentId} - Ho ten: {item.s.StudentName} - Ngay sinh: {item.s.Gender} - Dia chi: {item.s.Address} - Khoa: {item.f.FacultyName}");
+                }
+                Console.WriteLine("\nDanh sach sinh vien khoa CNS do tuoi tu 18 den 20");
                 var select = list.Where(l => l.f.FacultyName.Equals("Công Nghệ Số") && (DateTime.Today.Year - l.s.Gender.Value.Year > 18) && (DateTime.Today.Year - l.s.Gender.Value.Year <20));
                 foreach (var item in select)
                 {
